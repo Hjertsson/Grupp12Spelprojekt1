@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerCombatController : MonoBehaviour
 {
-    [SerializeField]
-    private int health = 10;
     [SerializeField]
     FishManager fishManager;
 
@@ -26,16 +25,19 @@ public class PlayerCombatController : MonoBehaviour
             if (!died)
             {
                 int damage = fishManager.spawnedFishes[0].Attack();
-                health -= damage;
+                PlayerStatManager.health -= damage;
                 Debug.Log("took "+damage+" damage");
-                if (health <= 0)
+                if (PlayerStatManager.health <= 0)
                 {
                     Debug.Log("player died");
                 }
             }
             else
             {
+                PlayerStatManager.FishesCaught++;
+                Debug.Log(PlayerStatManager.FishesCaught+" fishes caught");
                 fishManager.spawnedFishes.Remove(fishManager.spawnedFishes[0]);
+                SceneManager.LoadScene("FishingScene");
             Debug.Log("Fish died");
             }
         }
