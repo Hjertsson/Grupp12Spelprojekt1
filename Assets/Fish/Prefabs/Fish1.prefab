@@ -104,4 +104,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f761cbc166241bf45a7c2feb57be26e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishController
-  health: 1
+  health: 5
+  damage: 5
