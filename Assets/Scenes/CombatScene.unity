@@ -150,7 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820ef53fa93b8854fbbf958995c7b3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombatController
-  health: 10
   fishManager: {fileID: 1539077156}
 --- !u!212 &522770058
 SpriteRenderer:

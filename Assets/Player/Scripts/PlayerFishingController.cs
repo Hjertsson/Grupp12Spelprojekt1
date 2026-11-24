@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,8 @@ public class PlayerFishingController : MonoBehaviour
     float minigameTimer;
     [SerializeField]
     float catchTime = 3f;
+    [SerializeField]
+    Animator animator;
 
     void Start()
     {
@@ -25,6 +28,8 @@ public class PlayerFishingController : MonoBehaviour
             {
                 fishing = false;
                 minigameActive = false;
+                animator.SetBool("isFishing",false);
+                animator.SetBool("isReeling",false);
                 catchTime = 3;
             }
         }
@@ -40,9 +45,17 @@ public class PlayerFishingController : MonoBehaviour
 
     public void StartMinigame()
     {
+        animator.SetTrigger("bite");
+        animator.SetBool("isReeling",true);
         Debug.Log("minigame start");
         minigameTimer = 2;
         minigameActive = true;
+    }
+
+    IEnumerator changeScene()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("CombatScene");
     }
 
     public void Attack(InputAction.CallbackContext context)
@@ -52,11 +65,13 @@ public class PlayerFishingController : MonoBehaviour
             Debug.Log("PRESSED");
             if (minigameActive && minigameTimer > 0)
             {
-                SceneManager.LoadScene("CombatScene");
+                animator.SetBool("caught",true);
+                StartCoroutine(changeScene());
             }
             if (!fishing)
             {
                 fishing = true;
+                animator.SetBool("isFishing",true);
             }
         }
     }
