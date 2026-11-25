@@ -21,5 +21,13 @@ public class PlayerStatManager : ScriptableObject
         }
         return false;
     }
-    
+
+    public static void Reset()
+    {
+        FishesCaught = 0;
+        Health = 10;
+        QuotaGoal = 2;
+        CurrentDay = 1;
+        DayCount = 5;
+    }
 }

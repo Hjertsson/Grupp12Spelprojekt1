@@ -31,7 +31,10 @@ public class PlayerCombatController : MonoBehaviour
                 Debug.Log("took "+damage+" damage");
                 if (PlayerStatManager.Health <= 0)
                 {
+                    PlayerStatManager.Reset();
+                    SceneManager.LoadScene("GameOverScene");
                     Debug.Log("player died");
+                    return;
                 }
             }
             else
