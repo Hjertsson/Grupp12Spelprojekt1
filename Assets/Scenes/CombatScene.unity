@@ -938,7 +938,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishManager
   fishes:
-  - {fileID: 916774194402490728, guid: d9f805c90f5a1944499e1e5586c2ffdd, type: 3}
+  - weight: 4
+    fishPrefab: {fileID: 916774194402490728, guid: d9f805c90f5a1944499e1e5586c2ffdd, type: 3}
+  - weight: 1
+    fishPrefab: {fileID: 916774194402490728, guid: e7d8fde3ee3148e4483823b2969dc049, type: 3}
   spawnedFishes: []
 --- !u!1 &1602488494
 GameObject:

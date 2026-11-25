@@ -36,6 +36,7 @@ public class PlayerCombatController : MonoBehaviour
             }
             else
             {
+                PlayerStatManager.FishesCaught++;
                 popUp.SetActive(true);
             }
         }

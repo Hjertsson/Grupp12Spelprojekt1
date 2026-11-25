@@ -4,12 +4,26 @@ using UnityEngine;
 
 public class FishManager : MonoBehaviour
 {
+    [Serializable]
+    struct WeightedFish
+    {
+        public int weight;
+        public GameObject fishPrefab;
+    }
     [SerializeField]
-    List<GameObject> fishes;
+    List<WeightedFish> fishes;
     public List<FishController> spawnedFishes;
     void Start()
     {
-        var fish = Instantiate(fishes[UnityEngine.Random.Range(0,fishes.Count)]);
+        List<GameObject> weightedList = new();
+        foreach (var weightedFish in fishes)
+        {
+            for (int i = 0; i < weightedFish.weight; i++)
+            {
+                weightedList.Add(weightedFish.fishPrefab);   
+            }
+        }
+        var fish = Instantiate(weightedList[UnityEngine.Random.Range(0,weightedList.Count)]);
         spawnedFishes.Add(fish.GetComponent<FishController>());
     }
 }

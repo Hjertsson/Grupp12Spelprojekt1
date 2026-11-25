@@ -11,7 +11,6 @@ public class PlayerStatManager : ScriptableObject
 
     public static bool CatchFish()
     {
-        FishesCaught++;
         if (FishesCaught >= QuotaGoal)
         {
             CurrentDay++;
