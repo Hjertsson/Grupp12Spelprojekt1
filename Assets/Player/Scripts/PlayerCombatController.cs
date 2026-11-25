@@ -7,6 +7,8 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField]
     FishManager fishManager;
 
+    [SerializeField] private GameObject popUp;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,24 +36,29 @@ public class PlayerCombatController : MonoBehaviour
             }
             else
             {
-                if (PlayerStatManager.CatchFish())
-                {
-                    if (PlayerStatManager.CurrentDay == PlayerStatManager.DayCount)
-                    {
-                        
-                    }
-                    else
-                    {
-                        Debug.Log("NightScene");
-                        SceneManager.LoadScene("NightScene");
-                        return;
-                    }
-                }
-                Debug.Log(PlayerStatManager.FishesCaught+" fishes caught");
-                fishManager.spawnedFishes.Remove(fishManager.spawnedFishes[0]);
-                SceneManager.LoadScene("FishingScene");
-            Debug.Log("Fish died");
+                popUp.SetActive(true);
             }
         }
+    }
+
+    public void Continue()
+    {
+        if (PlayerStatManager.CatchFish())
+        {
+            if (PlayerStatManager.CurrentDay == PlayerStatManager.DayCount)
+            {
+                        
+            }
+            else
+            {
+                Debug.Log("NightScene");
+                SceneManager.LoadScene("NightScene");
+                return;
+            }
+        }
+        Debug.Log(PlayerStatManager.FishesCaught+" fishes caught");
+        fishManager.spawnedFishes.Remove(fishManager.spawnedFishes[0]);
+        SceneManager.LoadScene("FishingScene");
+        Debug.Log("Fish died");
     }
 }

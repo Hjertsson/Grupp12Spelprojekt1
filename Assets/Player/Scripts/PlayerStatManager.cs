@@ -5,7 +5,7 @@ public class PlayerStatManager : ScriptableObject
 {
     public static int FishesCaught = 0;
     public static int Health = 10;
-    public static int QuotaGoal = 1;
+    public static int QuotaGoal = 2;
     public static int CurrentDay = 1;
     public static int DayCount = 5;
 
