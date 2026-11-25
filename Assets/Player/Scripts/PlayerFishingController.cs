@@ -12,10 +12,11 @@ public class PlayerFishingController : MonoBehaviour
     float catchTime = 3f;
     [SerializeField]
     Animator animator;
+    [SerializeField]
+    ParticleSystem particleSystem;
 
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -46,6 +47,7 @@ public class PlayerFishingController : MonoBehaviour
 
     public void StartMinigame()
     {
+        particleSystem.Play();
         animator.SetTrigger("bite");
         animator.SetBool("isReeling",true);
         Debug.Log("minigame start");
