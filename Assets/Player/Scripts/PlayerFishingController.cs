@@ -31,6 +31,7 @@ public class PlayerFishingController : MonoBehaviour
                 animator.SetBool("isFishing",false);
                 animator.SetBool("isReeling",false);
                 catchTime = 3;
+                return;
             }
         }
         if (fishing)
@@ -65,7 +66,7 @@ public class PlayerFishingController : MonoBehaviour
             Debug.Log("PRESSED");
             if (minigameActive && minigameTimer > 0)
             {
-                animator.SetBool("caught",true);
+                animator.SetTrigger("caught");
                 StartCoroutine(changeScene());
             }
             if (!fishing)
