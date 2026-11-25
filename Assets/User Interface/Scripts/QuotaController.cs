@@ -9,7 +9,7 @@ public class QuotaController : MonoBehaviour
     {
         currentQuota = PlayerStatManager.FishesCaught;
         Debug.Log(currentQuota);
-        GetComponent<TMP_Text>().text = currentQuota.ToString();
+        GetComponent<TMP_Text>().text = currentQuota.ToString()+"/"+PlayerStatManager.QuotaGoal;
     }
     
     public void Quota()
