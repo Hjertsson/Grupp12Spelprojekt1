@@ -25,16 +25,28 @@ public class PlayerCombatController : MonoBehaviour
             if (!died)
             {
                 int damage = fishManager.spawnedFishes[0].Attack();
-                PlayerStatManager.health -= damage;
+                PlayerStatManager.Health -= damage;
                 Debug.Log("took "+damage+" damage");
-                if (PlayerStatManager.health <= 0)
+                if (PlayerStatManager.Health <= 0)
                 {
                     Debug.Log("player died");
                 }
             }
             else
             {
-                PlayerStatManager.FishesCaught++;
+                if (PlayerStatManager.CatchFish())
+                {
+                    if (PlayerStatManager.CurrentDay == PlayerStatManager.DayCount)
+                    {
+                        
+                    }
+                    else
+                    {
+                        Debug.Log("NightScene");
+                        SceneManager.LoadScene("NightScene");
+                        return;
+                    }
+                }
                 Debug.Log(PlayerStatManager.FishesCaught+" fishes caught");
                 fishManager.spawnedFishes.Remove(fishManager.spawnedFishes[0]);
                 SceneManager.LoadScene("FishingScene");
