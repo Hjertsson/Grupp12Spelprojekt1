@@ -15,6 +15,17 @@ public class PlayerFishingController : MonoBehaviour
     [SerializeField]
     ParticleSystem particleSystem;
 
+    [SerializeField]
+    private GameObject PauseMenuObject;
+    private bool paused = false;
+
+    public void PauseGame()
+    {
+        paused = !paused;
+        PauseMenuObject.SetActive(paused);
+        Time.timeScale = paused ? 0 : 1;
+    }
+    
     void Start()
     {
     }
