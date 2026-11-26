@@ -8,6 +8,7 @@ public class PlayerCombatController : MonoBehaviour
     FishManager fishManager;
 
     [SerializeField] private GameObject popUp;
+    [SerializeField] private GameObject attackMenu;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,9 +21,9 @@ public class PlayerCombatController : MonoBehaviour
             
     }
 
-    public void Attack(InputAction.CallbackContext context)
+    public void Attack1()
     {
-        if (context.performed){
+       
         var died = fishManager.spawnedFishes[0].TakeDamage(1);
             if (!died)
             {
@@ -41,7 +42,36 @@ public class PlayerCombatController : MonoBehaviour
             {
                 PlayerStatManager.FishesCaught++;
                 popUp.SetActive(true);
+                attackMenu.SetActive(false);
             }
+    }
+
+    public void Attack2()
+    {
+        if (Random.Range(0,2) == 0)
+        {
+            Debug.Log("attack failed");
+            return;
+        }
+        var died = fishManager.spawnedFishes[0].TakeDamage(2);
+        if (!died)
+        {
+            int damage = fishManager.spawnedFishes[0].Attack();
+            PlayerStatManager.Health -= damage;
+            Debug.Log("took "+damage+" damage");
+            if (PlayerStatManager.Health <= 0)
+            {
+                PlayerStatManager.Reset();
+                SceneManager.LoadScene("GameOverScene");
+                Debug.Log("player died");
+                return;
+            }
+        }
+        else
+        {
+            PlayerStatManager.FishesCaught++;
+            popUp.SetActive(true);
+            attackMenu.SetActive(false);
         }
     }
 
