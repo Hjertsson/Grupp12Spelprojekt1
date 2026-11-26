@@ -17,9 +17,23 @@ public class PlayerStatManager : ScriptableObject
             FishesCaught = 0;
             QuotaGoal += 2;
             Debug.Log("Quota Reached");
+            Save();
             return true;
         }
         return false;
+    }
+
+    public static void Save()
+    {
+        PlayerPrefs.SetInt("CurrentDay",CurrentDay);
+        PlayerPrefs.Save();
+        Debug.Log("saved");
+    }
+    public static void Load()
+    {
+        CurrentDay = PlayerPrefs.GetInt("CurrentDay",1);
+        Debug.Log("loaded");
+        QuotaGoal = 2 * CurrentDay;
     }
 
     public static void Reset()

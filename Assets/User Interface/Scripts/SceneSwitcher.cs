@@ -12,4 +12,10 @@ public class SceneSwitcher : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Load()
+    {
+        PlayerStatManager.Load();
+        SceneManager.LoadScene("FishingScene");
+    }
 }
