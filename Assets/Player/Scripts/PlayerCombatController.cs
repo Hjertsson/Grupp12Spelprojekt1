@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,11 @@ public class PlayerCombatController : MonoBehaviour
 
     [SerializeField] private GameObject popUp;
     [SerializeField] private GameObject attackMenu;
+    
+    
+    //För DamageIndicators, ta bort om ni vill göra något annat :)
+    [SerializeField] private DamageIndicator playerAttackIndicator;
+    [SerializeField] private DamageIndicator enemyDamageIndicator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,11 +31,17 @@ public class PlayerCombatController : MonoBehaviour
     {
        
         var died = fishManager.spawnedFishes[0].TakeDamage(1);
+        //För DamageIndicators
+        playerAttackIndicator.AttackIndicator(1);
+
             if (!died)
             {
                 int damage = fishManager.spawnedFishes[0].Attack();
                 PlayerStatManager.Health -= damage;
                 Debug.Log("took "+damage+" damage");
+                
+                //För DamageIndicators
+                enemyDamageIndicator.AttackIndicator(damage);
                 if (PlayerStatManager.Health <= 0)
                 {
                     PlayerStatManager.Reset();
@@ -50,15 +62,25 @@ public class PlayerCombatController : MonoBehaviour
     {
         if (Random.Range(0,2) == 0)
         {
+            //För DamageIndicators
+            playerAttackIndicator.MissedIndicator();
+            
             Debug.Log("attack failed");
             return;
         }
-        var died = fishManager.spawnedFishes[0].TakeDamage(2);
+        var died = fishManager.spawnedFishes[0].TakeDamage(2);  
+        //För DamageIndicators
+        playerAttackIndicator.AttackIndicator(2);
+        
         if (!died)
         {
             int damage = fishManager.spawnedFishes[0].Attack();
             PlayerStatManager.Health -= damage;
             Debug.Log("took "+damage+" damage");
+            
+            //för DamageIndicators
+            enemyDamageIndicator.AttackIndicator(damage);
+            
             if (PlayerStatManager.Health <= 0)
             {
                 PlayerStatManager.Reset();
@@ -94,5 +116,6 @@ public class PlayerCombatController : MonoBehaviour
         fishManager.spawnedFishes.Remove(fishManager.spawnedFishes[0]);
         SceneManager.LoadScene("FishingScene");
         Debug.Log("Fish died");
+        
     }
 }
